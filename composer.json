@@ -1,0 +1,16 @@
+{
+  "name": "magnus/freshrss-githubdiff",
+  "description": "FreshRSS extension that adds commit messages and colored diffs to GitHub commit feed items.",
+  "license": "AGPL-3.0",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/FreshRSS/FreshRSS.git",
+      "no-api": true
+    }
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "^13",
+    "freshrss.org/freshrss": "1.29.1"
+  }
+}

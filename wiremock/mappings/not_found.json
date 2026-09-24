@@ -1,0 +1,13 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "GET",
+    "urlPathPattern": "/repos/[^/]+/[^/]+/commits/0{7}"
+  },
+  "response": {
+    "status": 404,
+    "jsonBody": {
+      "message": "Not Found"
+    }
+  }
+}

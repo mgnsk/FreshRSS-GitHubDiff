@@ -1,0 +1,36 @@
+---
+services:
+  freshrss:
+    image: freshrss/freshrss:latest
+    container_name: freshrss
+    hostname: freshrss
+    restart: unless-stopped
+    volumes:
+      - .:/var/www/FreshRSS/extensions/FreshRSS-GitHubDiff
+    environment:
+      FRESHRSS_ENV: development
+      GITHUB_DIFF_API_BASE: http://wiremock:8080
+    ports:
+      - "8080:80"
+    healthcheck:
+      test: cli/health.php
+      interval: 1s
+      timeout: 5s
+      retries: 10
+
+  composer:
+    image: composer
+    user: ${USER_ID}:${GROUP_ID}
+    volumes:
+      - .:/app
+
+  wiremock:
+    image: wiremock/wiremock:latest-alpine
+    volumes:
+      - ./wiremock:/home/wiremock
+    command: --local-response-templating
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1:8080/__admin/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

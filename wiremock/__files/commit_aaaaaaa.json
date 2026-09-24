@@ -1,0 +1,22 @@
+{
+  "sha": "aaaaaaa",
+  "html_url": "https://github.com/o/r/commit/aaaaaaa",
+  "commit": {
+    "message": "Fix <b>thing</b>\n\nLong body & details"
+  },
+  "files": [
+    {
+      "filename": "src/a.php",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "patch": "@@ -1,2 +1,2 @@\n ctx\n-old <x>\n+new"
+    },
+    {
+      "filename": "img.png",
+      "status": "added",
+      "additions": 0,
+      "deletions": 0
+    }
+  ]
+}

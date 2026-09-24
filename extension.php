@@ -6,6 +6,8 @@ class GitHubDiffExtension extends Minz_Extension
 
     private const MAX_BYTES = 200000;
 
+    private const DEFAULT_API_BASE = 'https://api.github.com';
+
     public string $pat = '';
 
     public function init()
@@ -47,6 +49,14 @@ class GitHubDiffExtension extends Minz_Extension
         return $entry;
     }
 
+    /** Overridable via env so tests can point at a mock GitHub API. */
+    private function apiBase(): string
+    {
+        $base = getenv('GITHUB_DIFF_API_BASE');
+
+        return rtrim($base !== false && $base !== '' ? $base : self::DEFAULT_API_BASE, '/');
+    }
+
     private function fetchCommit(string $owner, string $repo, string $sha): ?array
     {
         $headers = [
@@ -58,7 +68,7 @@ class GitHubDiffExtension extends Minz_Extension
             $headers[] = 'Authorization: Bearer '.$this->pat;
         }
 
-        $ch = curl_init("https://api.github.com/repos/$owner/$repo/commits/$sha");
+        $ch = curl_init($this->apiBase()."/repos/$owner/$repo/commits/$sha");
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HTTPHEADER => $headers,
