@@ -25,9 +25,22 @@ final class GitHubDiffExtensionTest extends TestCase
 
     private function admin(string $method, string $path): string
     {
-        $ctx = stream_context_create(['http' => ['method' => $method, 'ignore_errors' => true]]);
+        $ch = curl_init(self::WIREMOCK.'/__admin'.$path);
+        curl_setopt_array($ch, [
+            CURLOPT_CUSTOMREQUEST => $method,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 10,
+        ]);
+        $body = curl_exec($ch);
+        $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        $error = curl_error($ch);
+        curl_close($ch);
 
-        return (string) file_get_contents(self::WIREMOCK.'/__admin'.$path, false, $ctx);
+        if (!is_string($body) || $status >= 300) {
+            $this->fail("wiremock $method $path failed (HTTP $status): $error $body");
+        }
+
+        return $body;
     }
 
     private function run_hook(string $link, string $content = '<p>orig</p>'): string
@@ -99,7 +112,9 @@ final class GitHubDiffExtensionTest extends TestCase
     public function test_pat_is_sent_as_bearer_token_only_when_set(): void
     {
         $this->run_hook('https://github.com/o/r/commit/aaaaaaa');
-        $this->assertStringNotContainsString('Bearer', $this->admin('GET', '/requests'));
+        $journal = $this->admin('GET', '/requests');
+        $this->assertStringContainsString('/repos/o/r/commits/aaaaaaa', $journal);
+        $this->assertStringNotContainsString('Bearer', $journal);
 
         $this->admin('DELETE', '/requests');
         $this->ext->pat = 'secret-token';
