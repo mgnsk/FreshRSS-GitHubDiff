@@ -1,0 +1,16 @@
+.ghd-message, .ghd-diff {
+	font-family: monospace;
+	overflow-x: auto;
+	white-space: pre;
+	margin: .5em 0;
+}
+.ghd-file { font-weight: bold; margin-top: 1em; }
+.ghd-diff span { display: block; }
+.ghd-add { background: #e6ffec; color: #116329; }
+.ghd-del { background: #ffebe9; color: #82071e; }
+.ghd-hunk { background: #ddf4ff; color: #0550ae; }
+@media (prefers-color-scheme: dark) {
+	.ghd-add { background: #12261e; color: #7ee787; }
+	.ghd-del { background: #2d1416; color: #ff9492; }
+	.ghd-hunk { background: #10233a; color: #79c0ff; }
+}
