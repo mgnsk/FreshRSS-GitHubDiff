@@ -1,11 +1,13 @@
 .ghd-message, .ghd-diff {
-	font-family: monospace;
+	font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+	font-size: 12px;
+	line-height: 20px;
 	overflow-x: auto;
 	white-space: pre;
 	margin: .5em 0;
 }
 .ghd-file { font-weight: bold; margin-top: 1em; }
-.ghd-diff span { display: block; }
+.ghd-diff span { display: block; padding: 0 .5em; }
 .ghd-add { background: #e6ffec; color: #116329; }
 .ghd-del { background: #ffebe9; color: #82071e; }
 .ghd-hunk { background: #ddf4ff; color: #0550ae; }
