@@ -123,7 +123,7 @@ class GitHubDiffExtension extends Minz_Extension
                     str_starts_with($line, '-') => 'ghd-del',
                     default => 'ghd-ctx',
                 };
-                $html .= '<span class="'.$class.'">'.htmlspecialchars($line).'</span>';
+                $html .= '<span class="'.$class.'">'.htmlspecialchars($line).'</span><br>';
             }
             $html .= '</pre>';
             $size = strlen($html);

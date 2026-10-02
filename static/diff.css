@@ -7,7 +7,7 @@
 	margin: .5em 0;
 }
 .ghd-file { font-weight: bold; margin-top: 1em; }
-.ghd-diff span { display: block; padding: 0 .5em; }
+.ghd-diff span { padding: 0 .5em; }
 .ghd-add { background: #e6ffec; color: #116329; }
 .ghd-del { background: #ffebe9; color: #82071e; }
 .ghd-hunk { background: #ddf4ff; color: #0550ae; }

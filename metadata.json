@@ -2,7 +2,7 @@
   "name": "GitHubDiff",
   "author": "Magnus Kokk",
   "description": "Inserts the full commit message and a colored diff into GitHub commit feed items.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "entrypoint": "GitHubDiff",
   "type": "user"
 }
